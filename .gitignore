@@ -1,0 +1,25 @@
+# Working copies of the CVs. The deployable ones live in cv/ with clean
+# filenames — delete these two lines if you'd rather track the originals.
+Resume___Academic___Japan__*.pdf
+Resume___All__*.pdf
+
+# Original camera files. Only the cropped, optimised derivatives in
+# assets/img/ are published — these are 4MB each and carry the studio
+# watermark.
+SFT*.jpg
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
+
+# Local tooling
+.playwright-mcp/
+
+# Working notes — kept locally, never published. The repo is public and
+# anyone can browse it, so drafting notes and personal checklists stay out.
+.private/
+
+# Staged experiment, not published
+_cutout_*.png

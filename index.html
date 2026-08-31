@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en" data-skin="plain">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdullah — Human-Centered AI &amp; NLP Research</title>
+<meta name="description" content="Abdullah — researcher in human-centered AI, LLM reasoning and controlled text generation. Published in IEEE Access, PLOS ONE and the ACL Anthology (BLP 2025 @ AACL-IJCNLP).">
+<meta name="author" content="Abdullah">
+<meta name="theme-color" content="#ffffff">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Abdullah — Human-Centered AI &amp; NLP Research">
+<meta property="og:description" content="Making machine reasoning and generation controllable and inspectable by people. Published in IEEE Access, PLOS ONE and the ACL Anthology.">
+<meta property="og:image" content="assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/plain.css">
+<link rel="stylesheet" href="assets/css/stand.css">
+<link rel="stylesheet" href="assets/css/motion.css">
+<link rel="stylesheet" href="assets/css/print.css" media="print">
+
+<script>
+  // Applied before first paint: region first, then skin, so a stored Stand
+  // Mode preference cannot flash on a variant that does not offer it.
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var rg = (q.get('region') || '').toLowerCase();
+    var RG = { jp: 'jp', japan: 'jp', us: 'us', usa: 'us', uk: 'us', en: 'us' };
+    var region = RG[rg] || 'default';
+    var root = document.documentElement;
+
+    root.setAttribute('data-region', region);
+    root.setAttribute('data-jp-layer', region === 'jp' ? 'on' : 'off');
+
+    // Stand Mode ships with the Japan variant only. The stored preference is
+    // honoured there and ignored everywhere else, so /jp remembers the choice
+    // without /us ever inheriting it.
+    var skin = 'plain';
+    if (region === 'jp') {
+      try { if (localStorage.getItem('skin') === 'stand') skin = 'stand'; } catch (e) {}
+    }
+    root.setAttribute('data-skin', skin);
+
+    var f = q.get('focus');
+    if (f) root.setAttribute('data-focus', f.toLowerCase().replace(/\s+/g, '+'));
+    root.classList.add('js');
+  })();
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ══ Reading progress ═══════════════════════════════════════════════ -->
+<div class="progress" aria-hidden="true"><span class="progress__bar" data-progress></span></div>
+
+<!-- ══ Skin toggle — the zipper pull ══════════════════════════════════ -->
+<button type="button" class="zip-toggle" data-skin-toggle aria-pressed="false" aria-label="Switch to Stand Mode">
+  <span class="zip-toggle__track" aria-hidden="true">
+    <span class="zip-toggle__teeth"></span>
+    <span class="zip-toggle__slider">
+      <svg viewBox="0 0 24 32" width="12" height="16" aria-hidden="true">
+        <path d="M4 2h16v12l-6 6v10h-4V20L4 14V2z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="12" cy="26" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </span>
+  </span>
+  <span class="zip-toggle__label" data-toggle-label>Stand Mode</span>
+</button>
+<p class="sr-only" role="status" aria-live="polite" data-skin-status></p>
+
+<!-- ══ Section rail ═══════════════════════════════════════════════════ -->
+<nav class="rail" aria-label="Section navigation">
+  <ol class="rail__list">
+    <li><a href="#statement"    data-rail><i>01</i><b>研究概要</b><em>Statement</em></a></li>
+    <li><a href="#focus"        data-rail><i>02</i><b>研究分野</b><em>Focus</em></a></li>
+    <li><a href="#publications" data-rail><i>03</i><b>論文</b><em>Publications</em></a></li>
+    <li><a href="#education"    data-rail><i>04</i><b>学歴</b><em>Education</em></a></li>
+    <li><a href="#experience"   data-rail><i>05</i><b>職歴</b><em>Experience</em></a></li>
+    <li><a href="#projects"     data-rail><i>06</i><b>制作</b><em>Projects</em></a></li>
+    <li><a href="#skills"       data-rail><i>07</i><b>技能</b><em>Skills</em></a></li>
+    <li><a href="#service"      data-rail><i>08</i><b>実績</b><em>Service</em></a></li>
+    <li><a href="#contact"      data-rail><i>09</i><b>連絡</b><em>Contact</em></a></li>
+  </ol>
+</nav>
+
+<!-- ══ Menacing marks (stand mode only) ═══════════════════════════════ -->
+<div class="menacing" aria-hidden="true" data-menacing></div>
+
+
+<!-- ══ HERO ═══════════════════════════════════════════════════════════ -->
+<header class="hero" id="top">
+  <div class="hero__grid">
+
+    <div class="hero__body">
+      <p class="hero__kana" aria-hidden="true">アブドゥッラー</p>
+      <h1 class="hero__name" data-rush>Abdullah</h1>
+
+      <p class="hero__role">
+        Senior Software Engineer <span class="at">@</span> Avian BPO &amp; IT
+        <span class="hero__sep" aria-hidden="true">·</span>
+        <span class="hero__loc">Dhaka, Bangladesh</span>
+      </p>
+
+      <!-- EDITABLE: the opening line, per ?focus=. Nothing else on the page
+           changes with the focus parameter — every section stays complete. -->
+      <p class="hero__pitch" data-pitch="nlp+hci">
+        I work on making machine reasoning and generation
+        <strong>controllable and inspectable by the people using it</strong> —
+        LLM reasoning that a person can read and correct, and text generation
+        that obeys explicit structural constraints in low-resource languages.
+      </p>
+
+      <p class="hero__pitch" data-pitch="nlp" hidden>
+        I work on <strong>controllable generation and language modeling for
+        low-resource settings</strong> — making a model reach an explicitly
+        specified structural target rather than approximating it, and exposing
+        its reasoning as something a person can steer.
+      </p>
+
+      <p class="hero__pitch" data-pitch="hci" hidden>
+        I work on <strong>human–AI interaction</strong> — giving people a real
+        handle on machine reasoning instead of a verdict to accept or reject,
+        and designing the control surface rather than only the output.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#publications">Read the research</a>
+        <a class="btn" href="mailto:abdullah20@iut-dhaka.edu">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- With no portrait.jpg present the whole column is removed and the hero
+         runs full width, so the page never publishes with a broken-image box
+         on it. Drop the file in and the column returns by itself. -->
+    <div class="hero__aside">
+      <figure class="portrait">
+        <div class="portrait__frame">
+          <img src="assets/img/portrait-cut.webp"
+               srcset="assets/img/portrait-cut-440.webp 440w,
+                       assets/img/portrait-cut.webp 880w,
+                       assets/img/portrait-cut-1320.webp 1320w"
+               sizes="(max-width: 62rem) 148px, 340px"
+               alt="Abdullah" width="880" height="1039"
+               decoding="async"
+               onerror="var a=this.closest('.hero__aside'); if(a){a.hidden=true;}">
+        </div>
+        <figcaption class="hanko" aria-hidden="true"><span>ア</span></figcaption>
+      </figure>
+    </div>
+
+    <ul class="hero__stats">
+      <li><b>3</b><span>Peer-reviewed publications</span></li>
+      <li><b>9</b><span>Manuscripts reviewed for PLOS&nbsp;ONE</span></li>
+      <li><b>3.79</b><span>CGPA / 4.00 &nbsp;·&nbsp; IUT CSE</span></li>
+    </ul>
+
+    <ul class="hero__links">
+      <li><a href="mailto:abdullah20@iut-dhaka.edu">abdullah20@iut-dhaka.edu</a></li>
+      <li><a href="https://scholar.google.com/citations?user=URx45qMAAAAJ&amp;hl=en" rel="noopener">Google&nbsp;Scholar</a></li>
+      <li><a href="https://orcid.org/0009-0004-9112-8516" rel="noopener">ORCID&nbsp;0009-0004-9112-8516</a></li>
+      <li><a href="https://www.researchgate.net/profile/Abdullah-53" rel="noopener">ResearchGate</a></li>
+      <li><a href="https://github.com/A6du11ah" rel="noopener">github.com/A6du11ah</a></li>
+      <li><a href="https://linkedin.com/in/4bdullah" rel="noopener">linkedin.com/in/4bdullah</a></li>
+      <li><a href="tel:+8801304757828">+880 1304 757828</a></li>
+    </ul>
+
+  </div>
+
+  <a class="hero__scroll" href="#statement" aria-label="Scroll to research statement">
+    <span aria-hidden="true">Scroll</span>
+    <svg viewBox="0 0 12 28" width="12" height="28" aria-hidden="true">
+      <path d="M6 0v22M1 17l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+  </a>
+</header>
+
+
+<main id="main">
+
+<!-- ══ 01 · RESEARCH STATEMENT ════════════════════════════════════════ -->
+<section class="section" id="statement" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">01</span>
+    <span class="section__jp">研究概要</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Research Statement</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <!-- EDITABLE: three variants selected by ?focus= — edit freely -->
+    <div class="statement" data-statement="nlp+hci">
+      <p class="lede">
+        My work asks one question in two settings: <strong>when a model produces
+        something, what handle does a person get on how it got there — and how do
+        they change it?</strong>
+      </p>
+      <p>
+        On the interaction side, <em>Re-Think</em> restructures LLM inference into two
+        stages with an editable intermediate. The model surfaces its own clarifying
+        question–answer pairs before answering; the user reads them, corrects what is
+        wrong, and the model reasons again from the corrected trace. Across reasoning
+        benchmarks and user studies this improved accuracy, calibration of trust, and
+        engagement — reasoning becomes a shared artefact rather than a black box.
+      </p>
+      <p>
+        On the modeling side, I work on generation under explicit structural control.
+        My BLP 2025 paper conditions Bangla poetry generation on rhyme, meter,
+        word-count and boundary tokens, so a model reaches a requested poetic form
+        instead of approximating it — a hard case, because Bangla is low-resource and
+        its prosody is not well served by architectures tuned on English.
+      </p>
+      <p>
+        These are the same problem from two directions: legible, steerable model
+        behaviour. I want to continue it in a lab that takes the modeling and the
+        human side equally seriously.
+      </p>
+    </div>
+
+    <div class="statement" data-statement="nlp" hidden>
+      <p class="lede">
+        I work on <strong>controllable generation and language modeling for
+        low-resource settings</strong> — making a model hit an explicitly specified
+        target rather than approximating it.
+      </p>
+      <p>
+        My BLP 2025 paper introduces a structure-aware framework for Bangla poetry
+        generation: fine-tuned LLMs conditioned on rhyme, meter, word-count and
+        boundary control tokens, with variable structural conditioning that permits
+        flexible poetic forms. It improved rhyme consistency, metrical balance and
+        coherence in a setting where data is scarce and prosody differs sharply from
+        the English corpora most architectures are tuned on.
+      </p>
+      <p>
+        <em>Re-Think</em> extends the same instinct to inference: a two-stage
+        procedure that exposes the model's intermediate reasoning as editable
+        question–answer pairs, so a correction to the trace propagates into the final
+        answer. It is a decoding-time control mechanism as much as an interface,
+        and it improved accuracy across several reasoning benchmarks.
+      </p>
+      <p>
+        I am looking for a lab where I can push further on controlled generation,
+        multilingual and low-resource NLP, and inference-time methods for steering
+        model behaviour.
+      </p>
+    </div>
+
+    <div class="statement" data-statement="hci" hidden>
+      <p class="lede">
+        I work on <strong>human–AI interaction</strong> — specifically, on giving
+        people a real handle on machine reasoning instead of a verdict to accept or
+        reject.
+      </p>
+      <p>
+        <em>Re-Think</em>, my current project, restructures LLM inference into two
+        stages joined by an editable intermediate. Rather than emitting a chain of
+        thought as a read-only artefact, the model surfaces its own clarifying
+        question–answer pairs; the user inspects them, edits what is wrong, and the
+        model reasons again from the corrected trace. Evaluation combined reasoning
+        benchmarks with user studies, and showed gains in accuracy alongside
+        improvements in user trust and engagement — the metacognitive loop matters as
+        much as the score.
+      </p>
+      <p>
+        This grew out of a broader interest in metacognition in AI and in
+        user-centered design for systems whose behaviour is probabilistic. My
+        modeling work on structurally-controlled generation is the same commitment
+        approached from the other side: designing the control surface, not just the
+        output.
+      </p>
+      <p>
+        I want to pursue this in a lab working on interaction design for intelligent
+        systems, mixed-methods evaluation, or human-centered AI.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ 02 · RESEARCH FOCUS ════════════════════════════════════════════ -->
+<section class="section" id="focus" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">02</span>
+    <span class="section__jp">研究分野</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Research Focus</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <div class="pillars">
+
+      <article class="pillar" data-pillar="hci" data-reveal>
+        <span class="pillar__idx" aria-hidden="true">ア</span>
+        <h3>Human-Centered AI &amp; HCI</h3>
+        <p>
+          Interfaces that make model reasoning inspectable and correctable.
+          Metacognition in AI, calibration of user trust, and mixed-methods
+          evaluation combining benchmarks with user studies.
+        </p>
+        <ul class="tags">
+          <li>Human-AI Interaction</li><li>Metacognition in AI</li>
+          <li>Human-Centered Reasoning</li><li>User-Centered Design</li>
+          <li>Interaction Design</li><li>Prototyping</li><li>Personalization</li>
+        </ul>
+      </article>
+
+      <article class="pillar" data-pillar="nlp" data-reveal>
+        <span class="pillar__idx" aria-hidden="true">イ</span>
+        <h3>NLP &amp; Language Modeling</h3>
+        <p>
+          Generation under explicit structural control, and language modeling
+          where data is scarce. Prompting and inference-time methods for steering
+          what a model produces.
+        </p>
+        <ul class="tags">
+          <li>Controlled Text Generation</li><li>Low-Resource NLP</li>
+          <li>Language Modeling</li><li>LLM Reasoning</li>
+          <li>Prompt Engineering</li><li>Multilingual NLP</li><li>RAG</li>
+        </ul>
+      </article>
+
+      <article class="pillar" data-pillar="vision" data-reveal>
+        <span class="pillar__idx" aria-hidden="true">ウ</span>
+        <h3>Vision &amp; Pattern Recognition</h3>
+        <p>
+          Video understanding and action recognition at dataset scale — building
+          the corpus as well as the model, and the engineering discipline that
+          large-scale supervised work demands.
+        </p>
+        <ul class="tags">
+          <li>Computer Vision</li><li>Action Recognition</li>
+          <li>Video Understanding</li><li>Pattern Recognition</li>
+          <li>Dataset Construction</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 03 · PUBLICATIONS & RESEARCH ═══════════════════════════════════ -->
+<section class="section section--feature" id="publications" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">03</span>
+    <span class="section__jp">論文</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Publications &amp; Research</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <p class="section__meta">
+      <span><b>3</b> peer-reviewed</span>
+      <span><b>2</b> as joint first author</span>
+      <span><b>1</b> in preparation</span>
+      <span>IEEE Access</span><span>PLOS ONE</span><span>AACL-IJCNLP&nbsp;2025</span>
+    </p>
+
+    <ol class="pubs">
+
+      <li class="pub" data-reveal>
+        <div class="pub__side">
+          <span class="pub__year">2025 —</span>
+          <span class="badge badge--prep">In Preparation</span>
+        </div>
+        <div class="pub__body">
+          <h3 class="pub__title">Re-Think: Interactive Two-Stage Self-Regulated Reasoning for LLMs</h3>
+          <p class="pub__venue">
+            Manuscript in preparation for <cite>International Journal of Human-Computer Studies</cite> (IJHCS)
+          </p>
+          <ul class="pub__points">
+            <li>Proposed a reflective prompting framework that makes large language model reasoning transparent and collaborative.</li>
+            <li>Designed two-step reasoning with editable question–answer pairs, enabling users to inspect and guide model thinking.</li>
+            <li>Evaluated across multiple reasoning benchmarks and user studies, demonstrating improvements in reasoning accuracy, user trust, and engagement.</li>
+          </ul>
+          <p class="pub__tags"><span>Human-AI Interaction</span><span>LLM Reasoning</span><span>Prompt Engineering</span></p>
+        </div>
+      </li>
+
+      <li class="pub" data-reveal>
+        <div class="pub__side">
+          <span class="pub__year">2025</span>
+          <span class="badge badge--pub">Published</span>
+          <span class="badge badge--first">Joint First Author</span>
+        </div>
+        <div class="pub__body">
+          <h3 class="pub__title">Form-aware Poetic Generation for Bangla</h3>
+          <p class="pub__authors">
+            Amina<sup>*</sup>, <strong>Abdullah</strong><sup>*</sup>, Mueeze Al Mushabbir, Sabbir Ahmed
+            <span class="pub__equal"><sup>*</sup> These authors contributed equally.</span>
+          </p>
+          <p class="pub__venue">
+            <cite>Proceedings of the Second Workshop on Bangla Language Processing (BLP 2025)</cite>,
+            co-located with <strong>AACL-IJCNLP 2025</strong> &nbsp;·&nbsp; Mumbai, India
+            <br>ACL Anthology, pages 366–372 &nbsp;·&nbsp; ISBN 979-8-89176-314-2
+          </p>
+          <ul class="pub__points">
+            <li>Proposed a structure-aware framework for Bangla poetry generation using fine-tuned LLMs with rhyme, meter, word count, and boundary control tokens.</li>
+            <li>Introduced variable structural conditioning enabling flexible poetic forms and improved rhyme consistency, metrical balance, and coherence in low-resource settings.</li>
+          </ul>
+          <p class="pub__links">
+            <a href="https://doi.org/10.18653/v1/2025.banglalp-1.30" rel="noopener">DOI</a>
+            <a href="https://aclanthology.org/2025.banglalp-1.30.pdf" rel="noopener">PDF</a>
+            <a href="https://aclanthology.org/2025.banglalp-1.30/" rel="noopener">ACL Anthology</a>
+          </p>
+          <p class="pub__tags"><span>Controlled Generation</span><span>Low-Resource NLP</span><span>Fine-Tuning</span></p>
+        </div>
+      </li>
+
+      <li class="pub" data-reveal>
+        <div class="pub__side">
+          <span class="pub__year">2026</span>
+          <span class="badge badge--pub">Published</span>
+          <span class="badge badge--first">Joint First Author</span>
+        </div>
+        <div class="pub__body">
+          <h3 class="pub__title">CricShot10k: A Large-Scale Video Dataset for Cricket Shot Classification</h3>
+          <p class="pub__authors">
+            Mubtasim Kamal Dihan<sup>*</sup>, <strong>Abdullah</strong><sup>*</sup>, Amina, Sabbir Ahmed
+            <span class="pub__equal"><sup>*</sup> These authors contributed equally.</span>
+          </p>
+          <p class="pub__venue"><cite>IEEE Access</cite></p>
+          <ul class="pub__points">
+            <li>Built the largest and most diverse cricket shot video dataset with 10k+ clips across 15 classes using automated trimming and YOLO-based detection.</li>
+            <li>Proposed a novel classification framework, CricShotNet, integrating cropping and segmentation layers, achieving 89% accuracy and outperforming existing benchmarks.</li>
+          </ul>
+          <p class="pub__links">
+            <a href="https://doi.org/10.1109/ACCESS.2026.3663220" rel="noopener">DOI</a>
+            <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11389735" rel="noopener">PDF</a>
+            <a href="https://github.com/Dihan69/CricShot10k" rel="noopener">Code &amp; Dataset</a>
+          </p>
+          <p class="pub__tags"><span>Video Understanding</span><span>Action Recognition</span><span>Dataset</span></p>
+        </div>
+      </li>
+
+      <li class="pub" data-reveal>
+        <div class="pub__side">
+          <span class="pub__year">2026</span>
+          <span class="badge badge--pub">Published</span>
+          <span class="badge badge--thesis">Undergraduate Thesis</span>
+        </div>
+        <div class="pub__body">
+          <!-- Title as published. The CV's working title ("A Machine Learning-Based
+               Lightweight Consensus Framework…") is not what appears in PLOS ONE,
+               so a search for that phrase would not find the paper. -->
+          <h3 class="pub__title">PoPI: A Machine Learning-Based Consensus Mechanism for Blockchain-Enabled IoT Systems</h3>
+          <p class="pub__authors">
+            Mubtasim Kamal Dihan, <strong>Abdullah</strong>, Amina, Faisal Hussain,
+            Md Moniruzzaman, Md Sakhawat Hossen
+          </p>
+          <p class="pub__venue"><cite>PLOS ONE</cite> &nbsp;·&nbsp; 13 April 2026</p>
+          <ul class="pub__points">
+            <li>Proposed a novel lightweight consensus algorithm designed for resource-constrained IoT devices within Blockchain-as-a-Service platforms.</li>
+            <li>Introduced dynamic features such as battery level and memory availability, plus supervisor nodes, to ensure fair participation and improve reliability of block producer selection.</li>
+            <li>Reduced inference latency by selecting a group of block producers instead of a single node, improving scalability, throughput, and security.</li>
+          </ul>
+          <p class="pub__links">
+            <a href="https://doi.org/10.1371/journal.pone.0347124" rel="noopener">DOI</a>
+            <a href="https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0347124&amp;type=printable" rel="noopener">PDF</a>
+          </p>
+          <p class="pub__tags"><span>Applied ML</span><span>Distributed Systems</span><span>IoT</span></p>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+
+<!-- ══ 04 · EDUCATION ═════════════════════════════════════════════════ -->
+<section class="section" id="education" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">04</span>
+    <span class="section__jp">学歴</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Education</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <ol class="timeline">
+      <li class="entry" data-reveal>
+        <div class="entry__when"><span>Jul 2021 — Oct 2025</span></div>
+        <div class="entry__what">
+          <h3>Bachelor of Science in Computer Science and Engineering</h3>
+          <p class="entry__org">Islamic University of Technology &nbsp;·&nbsp; Gazipur, Bangladesh</p>
+          <p class="entry__grade"><b>CGPA 3.79</b> <span>/ 4.00</span></p>
+        </div>
+      </li>
+      <li class="entry" data-reveal>
+        <div class="entry__when"><span>Jul 2018 — Feb 2020</span></div>
+        <div class="entry__what">
+          <h3>Higher Secondary Certificate, Science</h3>
+          <p class="entry__org">Notre Dame College &nbsp;·&nbsp; Dhaka, Bangladesh</p>
+          <p class="entry__grade"><b>GPA 5.00</b> <span>/ 5.00</span></p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ══ 05 · EXPERIENCE ════════════════════════════════════════════════ -->
+<section class="section" id="experience" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">05</span>
+    <span class="section__jp">職歴</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Professional Experience</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <ol class="timeline">
+
+      <li class="entry" data-reveal>
+        <div class="entry__when"><span>Jul 2026 — Present</span><b class="entry__now">Current</b></div>
+        <div class="entry__what">
+          <h3>Senior Software Engineer</h3>
+          <p class="entry__org">Avian BPO &amp; IT &nbsp;·&nbsp; Dhaka</p>
+          <p class="entry__summary">Developing AI-enabled systems and enterprise platforms to improve customer support and workforce productivity.</p>
+          <ul class="entry__points">
+            <li>Developing a centralized conversational engine for customer support across multiple applications, while contributing to the integration of HRM and CRM platforms across internal workflows.</li>
+            <li>Evaluating AI-agent methodologies and integrating LLM-based agents into organizational workflows to explore opportunities for workforce augmentation.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="entry" data-reveal>
+        <div class="entry__when"><span>Nov 2025 — Jun 2026</span></div>
+        <div class="entry__what">
+          <h3>Software Engineer</h3>
+          <p class="entry__org">Avian BPO &amp; IT &nbsp;·&nbsp; Dhaka</p>
+          <p class="entry__summary">Building secure iOS products, scalable backend systems, and a data-driven analytics platform for consumer SaaS.</p>
+          <ul class="entry__points">
+            <li>Shipped a production iOS password manager featuring zero-knowledge encryption, passkey authentication, autofill, and a comprehensive event analytics system.</li>
+            <li>Designed and built an internal ML-driven notification orchestration platform with behavioral recommendation, lifecycle classification, and delivery optimization.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="entry" data-reveal>
+        <div class="entry__when"><span>Aug 2025 — Present</span><b class="entry__now">Current</b></div>
+        <div class="entry__what">
+          <h3>Data Analyst <span class="entry__type">Part-time</span></h3>
+          <p class="entry__org">Data Analysis Company &nbsp;·&nbsp; Dhaka</p>
+          <p class="entry__summary">Data analysis and pipeline development for data-driven business insights.</p>
+          <ul class="entry__points">
+            <li>Collected, cleaned, and analyzed multi-source datasets to extract actionable insights and enable data-driven decision-making.</li>
+            <li>Built and maintained automated data pipelines ensuring accuracy, consistency, and compliance with data security standards.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="entry" data-reveal>
+        <div class="entry__when"><span>Jun 2024 — Jun 2025</span></div>
+        <div class="entry__what">
+          <h3>Tutor and Mentor <span class="entry__type">Part-time</span></h3>
+          <p class="entry__org">Self-Employed &nbsp;·&nbsp; Online</p>
+          <p class="entry__summary">Compilers and Interpreters · Functional and Logic Programming · Algorithms and Data Structures · Computer Systems Principles and Programming.</p>
+          <ul class="entry__points">
+            <li>Mentored students across multiple computer science courses, delivering structured lessons and guiding hands-on projects such as compiler construction, declarative programming, and advanced algorithmic problem solving.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="entry" data-reveal>
+        <div class="entry__when"><span>Jun 2024 — Aug 2024</span></div>
+        <div class="entry__what">
+          <h3>Frontend Developer <span class="entry__type">Intern</span></h3>
+          <p class="entry__org">TiCON System Ltd. &nbsp;·&nbsp; Dhaka</p>
+          <p class="entry__summary">Web interface for a machine-learning-based cricket shot recognition and analysis platform.</p>
+          <ul class="entry__points">
+            <li>Designed responsive interfaces for video analysis, user management, and personalized analytics — integrating ML-driven shot recognition and real-time commentary generation through interactive visualizations, in collaboration with cross-functional teams.</li>
+          </ul>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+
+<!-- ══ 06 · PROJECTS ══════════════════════════════════════════════════ -->
+<section class="section" id="projects" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">06</span>
+    <span class="section__jp">制作</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Selected Projects</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <div class="cards">
+
+      <article class="card" data-reveal>
+        <span class="card__pull" aria-hidden="true"></span>
+        <header class="card__head">
+          <h3>CVcraft</h3>
+          <span class="card__when">Jan — May 2024</span>
+        </header>
+        <p class="card__sub">Smart CV &amp; Portfolio Generation Platform</p>
+        <p class="card__desc">
+          A web platform for creating, customizing and managing professional CVs
+          (exportable as PDFs) and portfolios (generated as static HTML/CSS), with
+          secure authentication and editing tools for seamless content updates.
+        </p>
+        <ul class="tags">
+          <li>Java</li><li>Spring Boot</li><li>PostgreSQL</li><li>Docker</li><li>JavaScript</li>
+        </ul>
+        <a class="card__link" href="https://github.com/A6du11ah/CVcraft" rel="noopener">
+          View repository <span aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__pull" aria-hidden="true"></span>
+        <header class="card__head">
+          <h3>CodeLabs</h3>
+          <span class="card__when">Sep — Dec 2023</span>
+        </header>
+        <p class="card__sub">Interactive Coding Education Platform</p>
+        <p class="card__desc">
+          A real-time collaborative coding platform with role management, customizable
+          rooms and an integrated IDE — extended with real-time audio and video to make
+          remote learning genuinely interactive.
+        </p>
+        <ul class="tags">
+          <li>Express.js</li><li>WebSocket</li><li>Firebase</li><li>Google Cloud</li>
+        </ul>
+        <a class="card__link" href="https://github.com/A6du11ah/CodeLabs" rel="noopener">
+          View repository <span aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__pull" aria-hidden="true"></span>
+        <header class="card__head">
+          <h3>SHAROD</h3>
+          <span class="card__when">Jan — Apr 2023</span>
+        </header>
+        <p class="card__sub">E-commerce Platform</p>
+        <p class="card__desc">
+          A full-featured online shopping platform with complete CRUD functionality,
+          user authentication and an admin panel — covering product browsing, cart
+          management and order processing end to end.
+        </p>
+        <ul class="tags">
+          <li>PHP</li><li>MySQL</li><li>JavaScript</li><li>Apache</li><li>Postman</li>
+        </ul>
+        <a class="card__link" href="https://github.com/A6du11ah/SHAROD" rel="noopener">
+          View repository <span aria-hidden="true">→</span>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 07 · SKILLS ════════════════════════════════════════════════════ -->
+<section class="section" id="skills" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">07</span>
+    <span class="section__jp">技能</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Technical Skills</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <!-- Two tiers. The first is the set the academic CV presents to
+         the academic record, kept intact and kept first. The second is the
+         wider engineering range — shown, not hidden, because it is real
+         experience, but placed after the research-relevant set so it reads
+         as depth rather than noise. -->
+
+    <div class="skills__group" data-reveal>
+      <h3 class="skills__group-title">
+        <span class="skills__group-mark" aria-hidden="true">研究</span>
+        Research &amp; Method
+      </h3>
+      <p class="skills__group-note">The core methods my research is built on.</p>
+
+      <dl class="skills">
+        <div class="skills__row">
+          <dt>NLP &amp; LLMs</dt>
+          <dd><ul class="tags"><li>Transformers</li><li>LLMs</li><li>LLM Reasoning</li><li>Prompting</li><li>RAG</li><li>Text Generation</li><li>Controlled Generation</li><li>Text Classification</li><li>Multilingual NLP</li></ul></dd>
+        </div>
+        <div class="skills__row">
+          <dt>HCI &amp; Human-AI</dt>
+          <dd><ul class="tags"><li>Human-AI Interaction</li><li>Metacognition in AI</li><li>Human-Centered Reasoning</li><li>User-Centered Design</li><li>Interaction Design</li><li>Prototyping</li><li>Personalization</li><li>Figma</li></ul></dd>
+        </div>
+        <div class="skills__row">
+          <dt>ML &amp; Deep Learning</dt>
+          <dd><ul class="tags"><li>PyTorch</li><li>TensorFlow</li><li>Scikit-learn</li><li>Transfer Learning</li><li>Fine-Tuning</li></ul></dd>
+        </div>
+        <div class="skills__row">
+          <dt>Programming</dt>
+          <dd><ul class="tags"><li>Python</li><li>C++</li><li>C</li><li>Java</li><li>TypeScript</li><li>Bash</li></ul></dd>
+        </div>
+        <div class="skills__row">
+          <dt>Research Tools</dt>
+          <dd><ul class="tags"><li>NumPy</li><li>Pandas</li><li>Matplotlib</li><li>Git</li><li>Docker</li><li>Linux</li></ul></dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="skills__group skills__group--wide" data-reveal>
+      <h3 class="skills__group-title">
+        <span class="skills__group-mark" aria-hidden="true">開発</span>
+        Engineering &amp; Systems
+      </h3>
+      <p class="skills__group-note">
+        Production experience from four years of shipping software — the
+        reason I can build and maintain my own research infrastructure.
+      </p>
+
+      <dl class="skills">
+        <div class="skills__row">
+          <dt>Languages</dt>
+          <dd><ul class="tags"><li>JavaScript</li><li>Swift</li><li>PHP</li><li>SQL</li></ul></dd>
+        </div>
+        <div class="skills__row">
+          <dt>Frameworks</dt>
+          <dd><ul class="tags"><li>React.js</li><li>Express.js</li><li>Node.js</li><li>FastAPI</li><li>Django</li><li>React Native</li><li>Spring Boot</li></ul></dd>
+        </div>
+        <div class="skills__row">
+          <dt>Cloud Services</dt>
+          <dd><ul class="tags"><li>AWS</li><li>Microsoft Azure</li><li>Google Cloud</li><li>Firebase</li><li>Metabase</li></ul></dd>
+        </div>
+        <div class="skills__row">
+          <dt>Databases</dt>
+          <dd><ul class="tags"><li>Pinecone</li><li>Redis</li><li>PostgreSQL</li><li>MongoDB</li><li>MySQL</li><li>Oracle</li></ul></dd>
+        </div>
+        <div class="skills__row">
+          <dt>Practice</dt>
+          <dd><ul class="tags"><li>Analytical Thinking</li><li>Problem-Solving</li><li>Communication</li><li>Attention to Detail</li><li>Adaptability</li></ul></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 08 · SERVICE & ACHIEVEMENTS ════════════════════════════════════ -->
+<section class="section" id="service" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">08</span>
+    <span class="section__jp">実績</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Academic Service &amp; Achievements</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <div class="callout" data-reveal>
+      <p class="callout__stat"><b>9</b> <span>manuscripts</span></p>
+      <div class="callout__body">
+        <h3>Peer Reviewer &nbsp;·&nbsp; <cite>PLOS ONE</cite></h3>
+        <p>
+          Completed nine reviews of manuscripts in machine learning, natural language
+          processing and related computational research — reviewing for an
+          international journal while still at undergraduate level.
+        </p>
+      </div>
+    </div>
+
+    <ul class="awards">
+      <li data-reveal><span class="awards__rank">9<sup>th</sup></span><div><b>Datathon — KUET CSE BitFest 2025</b><span>among 100 teams</span></div></li>
+      <li data-reveal><span class="awards__rank">6<sup>th</sup></span><div><b>Project Showcasing — DUET Tech Fest 2023</b><span>among 50 teams</span></div></li>
+      <li data-reveal><span class="awards__rank">10<sup>th</sup></span><div><b>Game Jam — BUET CSE Fest 2023</b><span>among 80 teams</span></div></li>
+      <li data-reveal><span class="awards__rank">51<sup>st</sup></span><div><b>Robi Datathon 3.0</b><span>among 300 teams</span></div></li>
+      <li data-reveal><span class="awards__rank">L4</span><div><b>Google Foobar Coding Challenge</b><span>reached Level 4</span></div></li>
+      <li data-reveal><span class="awards__rank">—</span><div><b>Competitive Programming</b><span>ICPC · IUPC · Meta Hacker Cup</span></div></li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ══ 09 · CONTACT ═══════════════════════════════════════════════════ -->
+<section class="section section--contact" id="contact" data-section>
+  <div class="section__rail" aria-hidden="true">
+    <span class="section__num">09</span>
+    <span class="section__jp">連絡</span>
+  </div>
+
+  <div class="section__main">
+    <h2 class="section__title" data-split>Get in Touch</h2>
+    <div class="zipline" aria-hidden="true" data-zipline></div>
+
+    <p class="contact__lede">
+      If my work looks relevant to your lab, I would welcome the chance to discuss it.
+      I am happy to send my CV, a full research proposal, transcripts, or the
+      manuscripts themselves on request.
+    </p>
+
+    <div class="contact__grid">
+      <a class="contact__primary" href="mailto:abdullah20@iut-dhaka.edu">
+        <span class="contact__label">Email</span>
+        <span class="contact__value">abdullah20@iut-dhaka.edu</span>
+        <span class="contact__go" aria-hidden="true">→</span>
+      </a>
+      <ul class="contact__list">
+        <li><span>Scholar</span><a href="https://scholar.google.com/citations?user=URx45qMAAAAJ&amp;hl=en" rel="noopener">Google Scholar profile</a></li>
+        <li><span>ORCID</span><a href="https://orcid.org/0009-0004-9112-8516" rel="noopener">0009-0004-9112-8516</a></li>
+        <li><span>ResearchGate</span><a href="https://www.researchgate.net/profile/Abdullah-53" rel="noopener">ResearchGate profile</a></li>
+        <li><span>GitHub</span><a href="https://github.com/A6du11ah" rel="noopener">github.com/A6du11ah</a></li>
+        <li><span>LinkedIn</span><a href="https://linkedin.com/in/4bdullah" rel="noopener">linkedin.com/in/4bdullah</a></li>
+        <li><span>Phone</span><a href="tel:+8801304757828">+880 1304 757828</a></li>
+        <li><span>Location</span><a href="#contact" aria-disabled="true" tabindex="-1" class="is-static">Dhaka, Bangladesh &nbsp;·&nbsp; UTC+6</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="footer__sign" data-arrivederci>
+      <span class="footer__jp" aria-hidden="true">またね</span>
+      <span class="footer__word">Arrivederci</span>
+    </p>
+    <p class="footer__meta">
+      <span>© <span data-year>2026</span> Abdullah</span>
+      <span class="footer__dot" aria-hidden="true">·</span>
+      <span>Built by hand — no frameworks</span>
+      <span class="footer__dot" aria-hidden="true">·</span>
+      <a href="#top">Back to top</a>
+    </p>
+    <p class="footer__note">
+      Stand Mode is a tribute to Sticky Fingers from <cite>JoJo's Bizarre Adventure</cite>,
+      created by Hirohiko Araki. This site is a personal portfolio and is not affiliated
+      with or endorsed by the rights holders.
+    </p>
+  </div>
+</footer>
+
+
+<!-- ══ Zipper transition overlay ══════════════════════════════════════ -->
+<div class="unzip" data-unzip aria-hidden="true">
+  <span class="unzip__half unzip__half--l"></span>
+  <span class="unzip__half unzip__half--r"></span>
+  <span class="unzip__seam"><span class="unzip__slider"></span></span>
+</div>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Abdullah",
+  "email": "mailto:abdullah20@iut-dhaka.edu",
+  "telephone": "+880-1304-757828",
+  "jobTitle": "Senior Software Engineer",
+  "description": "Researcher in human-centered AI, LLM reasoning and controlled text generation.",
+  "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Islamic University of Technology",
+    "address": { "@type": "PostalAddress", "addressLocality": "Gazipur", "addressCountry": "BD" }
+  },
+  "worksFor": { "@type": "Organization", "name": "Avian BPO & IT" },
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "ORCID",
+    "value": "0009-0004-9112-8516",
+    "url": "https://orcid.org/0009-0004-9112-8516"
+  },
+  "sameAs": [
+    "https://orcid.org/0009-0004-9112-8516",
+    "https://scholar.google.com/citations?user=URx45qMAAAAJ&hl=en",
+    "https://www.researchgate.net/profile/Abdullah-53",
+    "https://github.com/A6du11ah",
+    "https://linkedin.com/in/4bdullah"
+  ],
+  "knowsAbout": [
+    "Human-Centered AI", "Human-Computer Interaction", "Natural Language Processing",
+    "Large Language Models", "Controlled Text Generation", "Low-Resource NLP",
+    "Computer Vision", "Action Recognition"
+  ],
+  "subjectOf": [
+    {
+      "@type": "ScholarlyArticle",
+      "name": "CricShot10k: A Large-Scale Video Dataset for Cricket Shot Classification",
+      "publisher": { "@type": "Organization", "name": "IEEE Access" },
+      "identifier": "10.1109/ACCESS.2026.3663220",
+      "url": "https://doi.org/10.1109/ACCESS.2026.3663220"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "PoPI: A machine learning-based consensus mechanism for blockchain-enabled IoT systems",
+      "publisher": { "@type": "Organization", "name": "PLOS ONE" },
+      "identifier": "10.1371/journal.pone.0347124",
+      "url": "https://doi.org/10.1371/journal.pone.0347124"
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Form-aware Poetic Generation for Bangla",
+      "publisher": { "@type": "Organization", "name": "Association for Computational Linguistics" },
+      "isPartOf": {
+        "@type": "PublicationVolume",
+        "name": "Proceedings of the Second Workshop on Bangla Language Processing (BLP 2025)",
+        "url": "https://aclanthology.org/volumes/2025.banglalp-1/"
+      },
+      "identifier": "10.18653/v1/2025.banglalp-1.30",
+      "url": "https://aclanthology.org/2025.banglalp-1.30/",
+      "isbn": "979-8-89176-314-2"
+    }
+  ]
+}
+</script>
+
+<script src="assets/js/region.js" defer></script>
+<script src="assets/js/focus.js" defer></script>
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+<script src="assets/js/motion.js" defer></script>
+</body>
+</html>

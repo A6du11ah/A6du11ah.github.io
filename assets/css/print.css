@@ -1,0 +1,167 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   PRINT — pages get printed.
+
+   Forces the plain skin regardless of what is on screen, expands every
+   scroll-revealed element (otherwise unscrolled sections print blank),
+   and prints link targets so a paper copy stays useful.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@page { margin: 16mm 14mm; }
+
+html, body {
+  background: #fff !important;
+  color: #000 !important;
+  font-size: 10.5pt !important;
+  line-height: 1.45 !important;
+}
+
+/* Every skin token forced back to monochrome. */
+:root, [data-skin="plain"], [data-skin="stand"] {
+  --bg: #fff !important;
+  --bg-alt: #fff !important;
+  --fg: #000 !important;
+  --fg-strong: #000 !important;
+  --fg-muted: #1a1a1a !important;
+  --fg-faint: #444 !important;
+  --rule: #bbb !important;
+  --rule-strong: #888 !important;
+  --accent: #000 !important;
+  --accent-strong: #000 !important;
+  --accent-fg: #fff !important;
+  --accent-border: #000 !important;
+  --link: #000 !important;
+  --tag-bg: #fff !important;
+  --callout-bg: #fff !important;
+  --badge-pub: #000 !important;
+  --badge-prep: #444 !important;
+  --menace: transparent !important;
+  --radius: 0 !important;
+  --border-w: 1px !important;
+  --font-display: "Newsreader", Georgia, serif !important;
+  --display-weight: 600 !important;
+  --display-track: 0 !important;
+}
+
+/* CRITICAL: reveal everything the observer may not have triggered. */
+[data-reveal],
+[data-split] .ch,
+[data-rush] .ch,
+.statement {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+  visibility: visible !important;
+}
+.pillar { opacity: 1 !important; }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Stand Mode sets literal hex colours (#F0B429 gold, #F5F7FA near-white)
+   rather than tokens, so redefining the tokens above cannot reach them.
+   Printing from Stand Mode would otherwise put gold headings and an
+   almost-invisible name on white paper. Everything is forced back to ink
+   here, then two grey tiers are restored for hierarchy.
+   ───────────────────────────────────────────────────────────────────── */
+body, body *,
+h1, h2, h3, h4, p, li, dt, dd, span, a, b, i, em, strong, cite, sup, figcaption {
+  color: #000 !important;
+}
+
+/* Secondary tier — supporting prose. */
+.pub__points li, .entry__points li, .card__desc, .pub__venue, .entry__summary {
+  color: #1a1a1a !important;
+}
+
+/* Tertiary tier — labels, dates, metadata. */
+.hero__kana, .section__num, .section__jp, .card__when, .entry__when,
+.entry__type, .footer__meta, .footer__note, .contact__list span,
+.hero__stats span, .callout__stat span, .pub__tags span, .pub__links,
+.pub__equal,
+.awards li span:last-child, .tags li, .section__meta span, .rail {
+  color: #444 !important;
+}
+
+/* Any dark panel must not print as a block of ink. */
+.pillar, .pub, .card, .portrait__frame, .footer__inner, .statement {
+  background-color: #fff !important;
+}
+
+/* Strip every decorative and interactive layer. */
+.zip-toggle, .rail, .menacing, .progress, .unzip,
+.hero__scroll, .skip-link, .card__pull, .zipline,
+.footer__sign::after, .hanko, .pillar__idx {
+  display: none !important;
+}
+/* With no portrait supplied the figure prints as an empty column. */
+.hero__aside[hidden] { display: none !important; }
+
+/* Flatten surfaces. */
+* {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  clip-path: none !important;
+  background-image: none !important;
+}
+.portrait__frame, .section__meta span, .tags li, .contact__primary {
+  background: #fff !important;
+  border: 1px solid #999 !important;
+}
+.contact__primary { color: #000 !important; }
+.entry__now, .badge--pub, .badge--first { background: #fff !important; color: #000 !important; border: 1px solid #000 !important; }
+.pub__authors strong { border-bottom: 1px solid #000 !important; }
+
+/* Page geometry: no fixed heights, no sticky, one column. */
+.hero {
+  min-height: 0 !important;
+  max-width: none !important;   /* sections drop theirs; keeping it here
+                                   left the hero indented against them */
+  margin: 0 !important;
+  padding: 0 0 10mm !important;
+  display: block !important;
+}
+.section { margin: 0 !important; }
+.hero__grid { grid-template-columns: 1fr 34mm !important; gap: 8mm !important; }
+.section {
+  display: block !important;
+  max-width: none !important;
+  padding: 0 0 7mm !important;
+}
+.section__rail {
+  position: static !important;
+  flex-direction: row !important;
+  gap: .6rem !important;
+  padding: 0 0 1mm !important;
+}
+.section__jp { writing-mode: horizontal-tb !important; }
+.footer__inner { padding: 5mm 0 0 !important; }
+
+.pub__links a { border: 0 !important; padding: 0 !important; text-transform: none !important; }
+.pub__links { gap: 0 1rem !important; }
+
+/* Print link targets. */
+.pub__links a::after,
+.card__link::after,
+.hero__links a::after,
+.contact__list a::after {
+  content: " (" attr(href) ")";
+  font-size: 8pt;
+  color: #444;
+  word-break: break-all;
+}
+.hero__links a[href^="mailto:"]::after,
+.contact__list a[href^="mailto:"]::after,
+.hero__links a[href^="tel:"]::after,
+.contact__list a[href^="tel:"]::after,
+.contact__list a.is-static::after { content: ""; }
+a { text-decoration: none !important; }
+
+/* Keep related content together across page breaks. */
+.section { break-inside: auto; }
+.section__title, .skills__group-title { break-after: avoid; page-break-after: avoid; }
+.pub, .entry, .card, .callout, .skills__row, .awards li, .pillar {
+  break-inside: avoid; page-break-inside: avoid;
+}
+#publications { break-before: auto; }
+
+/* Download buttons are meaningless on paper. */
+.hero__actions, .footer__note { display: none !important; }

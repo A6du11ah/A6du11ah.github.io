@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   PLAIN SKIN — pure black on white. No colour, no shadow, no gradient.
+   Rules and whitespace only. Body text sits at 21:1 contrast.
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-skin="plain"] {
+  --bg:            #ffffff;
+  --bg-alt:        #fafafa;
+
+  --fg-strong:     #000000;   /* 21.0:1 */
+  --fg:            #17171a;   /* 18.1:1 */
+  --fg-muted:      #3d3d42;   /* 10.8:1 */
+  --fg-faint:      #63636a;   /*  5.9:1 */
+
+  --rule:          #e2e2e4;
+  --rule-strong:   #c9c9cd;
+
+  --accent:        #000000;
+  --accent-strong: #000000;
+  --accent-hover:  #26262b;
+  --accent-fg:     #ffffff;
+  --accent-border: #000000;
+  --accent-bar-w:  3px;
+
+  --link:          #17171a;
+  --tag-bg:        #ffffff;
+  --callout-bg:    #fafafa;
+
+  --badge-pub:     #17171a;
+  --badge-prep:    #63636a;
+
+  --focus-ring:    #000000;
+  --sel-bg:        #000000;
+  --sel-fg:        #ffffff;
+
+  --menace:        transparent;
+  --unzip-bg:      #ffffff;
+  --unzip-teeth:   #000000;
+
+  --radius:        2px;
+  --border-w:      1px;
+
+  --font-display:  "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+  --display-weight: 500;
+  --display-track: -0.015em;
+
+  color-scheme: light;
+}
+
+[data-skin="plain"] body { background: var(--bg); }
+
+/* The name is the one place plain mode allows any flourish: optical
+   size and a hair of italic contrast in the serif. */
+[data-skin="plain"] .hero__name {
+  font-variation-settings: "opsz" 60;
+  font-weight: 500;
+}
+
+/* Hairline rules do the work colour would otherwise do. */
+[data-skin="plain"] .pillar,
+[data-skin="plain"] .pub,
+[data-skin="plain"] .card {
+  background: #ffffff;
+  border-color: var(--rule-strong);
+}
+[data-skin="plain"] .pillar:hover,
+[data-skin="plain"] .pub:hover,
+[data-skin="plain"] .card:hover {
+  border-color: #000000;
+}
+
+
+[data-skin="plain"] .callout { background: #fafafa; border-color: #000000; }
+
+[data-skin="plain"] .badge--pub { color: #000000; background: #ffffff; }
+[data-skin="plain"] .badge--prep { color: #4b4b51; border-style: dashed; }
+
+[data-skin="plain"] .entry__now { background: #000000; color: #ffffff; }
+
+[data-skin="plain"] .pub__points li::before,
+[data-skin="plain"] .entry__points li::before { background: #000000; }
+
+/* Numerals in plain mode read as figures, not as display type. */
+[data-skin="plain"] .hero__stats b,
+[data-skin="plain"] .callout__stat b,
+[data-skin="plain"] .awards__rank {
+  color: #000000;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+[data-skin="plain"] .zip-toggle:hover { background: #000000; color: #ffffff; }
+
+[data-skin="plain"] .hanko { border-color: #000000; color: #000000; }
+
+
+[data-skin="plain"] .contact__primary { background: #000000; color: #ffffff; }
+[data-skin="plain"] .contact__primary:hover { background: #26262b; }
+
+/* No decorative layer in plain mode. */
+[data-skin="plain"] .menacing { display: none; }
+[data-skin="plain"] .card__pull { display: none; }

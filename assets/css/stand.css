@@ -1,0 +1,363 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   STAND MODE — Sticky Fingers.
+
+   Palette taken from the Stand itself: steel blue-grey body, gold zipper
+   teeth, on ink. Part 5 violet and rose appear only as decoration.
+
+   Contrast against --ink (#0B0E14), computed, all AA or better:
+     #F5F7FA  18.0:1   body text
+     #C8D6E5  13.1:1   headings
+     #F0B429  10.4:1   gold accent
+     #8FA9C4   7.9:1   muted text
+     #A98BE0   6.9:1   violet text
+     #7C93AD   6.1:1   faint text
+     #E4407C   4.9:1   rose, used sparingly
+   Raw #5D7A99 (4.3:1) and #6B4E9E (3.0:1) are DECORATION ONLY —
+   never applied to text.
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-skin="stand"] {
+  --ink:           #0B0E14;
+  --ink-lift:      #12161f;
+  --ink-lift-2:    #171d28;
+
+  --bg:            #0B0E14;
+  --bg-alt:        #12161f;
+
+  --fg-strong:     #C8D6E5;
+  --fg:            #F5F7FA;
+  --fg-muted:      #8FA9C4;
+  --fg-faint:      #7C93AD;
+
+  --rule:          #253040;
+  --rule-strong:   #35455c;
+
+  --steel:         #5D7A99;   /* decoration only */
+  --violet:        #6B4E9E;   /* decoration only */
+  --violet-text:   #A98BE0;
+  --rose:          #E4407C;
+
+  --accent:        #F0B429;
+  --accent-strong: #F0B429;
+  --accent-hover:  #FFC93C;
+  --accent-fg:     #0B0E14;
+  --accent-border: #F0B429;
+  --accent-bar-w:  4px;
+
+  --link:          #F0B429;
+  --tag-bg:        #171d28;
+  --callout-bg:    #12161f;
+
+  --badge-pub:     #F0B429;
+  --badge-prep:    #A98BE0;
+
+  --focus-ring:    #F0B429;
+  --sel-bg:        #F0B429;
+  --sel-fg:        #0B0E14;
+
+  --menace:        rgba(93, 122, 153, .22);
+  --unzip-bg:      #0B0E14;
+  --unzip-teeth:   #F0B429;
+
+  --radius:        0px;
+  --border-w:      2px;
+
+  --font-display:  "Anton", "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
+  --display-weight: 400;
+  --display-track: .012em;
+
+  color-scheme: dark;
+}
+
+[data-skin="stand"] body {
+  background:
+    /* halftone */
+    radial-gradient(circle at center, rgba(93,122,153,.055) .9px, transparent 1px) 0 0 / 5px 5px,
+    /* corner wash */
+    radial-gradient(120% 90% at 88% -10%, rgba(107,78,158,.20), transparent 62%),
+    radial-gradient(100% 80% at 0% 100%, rgba(240,180,41,.06), transparent 58%),
+    var(--ink);
+  background-attachment: fixed, fixed, fixed, scroll;
+}
+
+/* Display type gets JoJo's weight: heavy, condensed, uppercase. */
+[data-skin="stand"] .hero__name,
+[data-skin="stand"] .section__title,
+[data-skin="stand"] .card__head h3,
+[data-skin="stand"] .footer__word {
+  text-transform: uppercase;
+}
+[data-skin="stand"] .hero__name {
+  color: #F5F7FA;
+  text-shadow:
+     3px 3px 0 var(--violet),
+     6px 6px 0 rgba(240,180,41,.30);
+}
+[data-skin="stand"] .section__title {
+  color: #F0B429;
+  text-shadow: 2px 2px 0 rgba(107,78,158,.55);
+}
+
+[data-skin="stand"] .hero__kana { color: #8FA9C4; }
+[data-skin="stand"] .hero__pitch strong,
+[data-skin="stand"] .statement strong { color: #F0B429; }
+[data-skin="stand"] .statement em { color: #C8D6E5; font-style: italic; }
+[data-skin="stand"] .statement .lede { color: #F5F7FA; }
+
+/* ── Menacing marks ──────────────────────────────────────────────── */
+[data-skin="stand"] .menacing { display: block; }
+
+/* ── Zipper divider ──────────────────────────────────────────────── */
+[data-skin="stand"] .zipline {
+  height: 20px;
+  margin-bottom: 2.5rem;
+  background-repeat: no-repeat;
+  background-position: calc(var(--zip, 0) * 100%) center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='20' viewBox='0 0 22 20'%3E%3Cpath d='M4 1h14v9l-5 4v5h-4v-5L4 10z' fill='%23F0B429'/%3E%3C/svg%3E");
+}
+[data-skin="stand"] .zipline::before,
+[data-skin="stand"] .zipline::after {
+  content: ""; position: absolute; left: 0; right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(90deg,
+    #F0B429 0 5px, transparent 5px 11px);
+  transform: none;
+  transition: transform .6s var(--ease-out);
+  opacity: .9;
+}
+[data-skin="stand"] .zipline::before {
+  top: calc(50% - 8px);
+  transform: translateY(calc(var(--zip, 0) * -5px));
+}
+[data-skin="stand"] .zipline::after {
+  top: 50%;
+  background-position: 5px 0;
+  transform: translateY(calc(var(--zip, 0) * 5px));
+}
+
+/* ── Panels: hard keylines, cut corner, no soft shadows ──────────── */
+[data-skin="stand"] .pillar,
+[data-skin="stand"] .pub,
+[data-skin="stand"] .card,
+[data-skin="stand"] .callout {
+  background: var(--ink-lift);
+  border-color: var(--rule-strong);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, .45);
+}
+/* Cut corner. clip-path removes the border along the diagonal, so the
+   edge is drawn back in by ::after — otherwise the panel reads as
+   accidentally clipped rather than deliberately cut. */
+[data-skin="stand"] .pillar,
+[data-skin="stand"] .card {
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+[data-skin="stand"] .pillar::after,
+[data-skin="stand"] .card::after {
+  content: "";
+  position: absolute;
+  top: 8px; right: -4px;
+  width: 26px; height: 2px;
+  background: var(--rule-strong);
+  transform: rotate(45deg);
+  transition: background .3s;
+  pointer-events: none;
+}
+[data-skin="stand"] .pillar:hover::after,
+[data-skin="stand"] .card:hover::after { background: #F0B429; }
+
+[data-skin="stand"] .pillar:hover,
+[data-skin="stand"] .pub:hover,
+[data-skin="stand"] .card:hover {
+  border-color: #F0B429;
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 rgba(240, 180, 41, .22);
+}
+
+[data-skin="stand"] .callout {
+  border-color: #F0B429;
+  background:
+    radial-gradient(circle at center, rgba(240,180,41,.05) .9px, transparent 1px) 0 0 / 5px 5px,
+    var(--ink-lift);
+}
+
+[data-skin="stand"] .pillar__idx { color: #F0B429; opacity: .22; }
+
+/* ── Card zipper pull tab ────────────────────────────────────────── */
+[data-skin="stand"] .card { padding-top: 2.35rem; }
+[data-skin="stand"] .card__pull {
+  display: block;
+  position: absolute; top: 0; left: 1.5rem;
+  width: 15px; height: 26px;
+  background: #F0B429;
+  clip-path: polygon(20% 0, 80% 0, 80% 46%, 62% 62%, 62% 100%, 38% 100%, 38% 62%, 20% 46%);
+  transition: transform .35s var(--ease-out);
+}
+[data-skin="stand"] .card:hover .card__pull { transform: translateY(7px); }
+
+/* ── Badges & tags ───────────────────────────────────────────────── */
+[data-skin="stand"] .badge--pub {
+  color: #0B0E14; background: #F0B429; border-color: #F0B429; font-weight: 700;
+}
+[data-skin="stand"] .badge--prep { color: #A98BE0; border-style: dashed; }
+[data-skin="stand"] .badge--thesis { color: #8FA9C4; }
+
+[data-skin="stand"] .tags li {
+  background: var(--tag-bg);
+  border-color: var(--rule-strong);
+  color: #A8BED6;
+}
+[data-skin="stand"] .pub__tags span { border-color: var(--rule-strong); color: #8FA9C4; }
+
+[data-skin="stand"] .section__meta span {
+  background: var(--ink-lift);
+  border-color: var(--rule-strong);
+}
+
+[data-skin="stand"] .entry__now {
+  background: #F0B429; color: #0B0E14; font-weight: 700;
+}
+[data-skin="stand"] .entry__org { color: #F0B429; }
+[data-skin="stand"] .entry__type { color: #8FA9C4; border-color: var(--rule-strong); }
+
+[data-skin="stand"] .pub__points li::before,
+[data-skin="stand"] .entry__points li::before {
+  background: #F0B429;
+  transform: rotate(45deg);
+}
+
+[data-skin="stand"] .pub__title,
+[data-skin="stand"] .entry__what h3,
+[data-skin="stand"] .pillar h3,
+[data-skin="stand"] .callout__body h3,
+
+/* ── Numerals: the loudest thing on the page, deliberately ───────── */
+[data-skin="stand"] .hero__stats b,
+[data-skin="stand"] .callout__stat b,
+[data-skin="stand"] .awards__rank {
+  color: #F0B429;
+  text-shadow: 2px 2px 0 rgba(107, 78, 158, .6);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────── */
+[data-skin="stand"] .btn {
+  background: transparent;
+  color: #F5F7FA;
+  border-color: var(--rule-strong);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, .5);
+}
+[data-skin="stand"] .btn:hover {
+  background: #F5F7FA; color: #0B0E14; border-color: #F5F7FA;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 rgba(240, 180, 41, .35);
+}
+[data-skin="stand"] .btn--primary {
+  background: #F0B429; color: #0B0E14; border-color: #F0B429; font-weight: 700;
+}
+[data-skin="stand"] .btn--primary:hover { background: #FFC93C; color: #0B0E14; border-color: #FFC93C; }
+
+[data-skin="stand"] .zip-toggle {
+  background: var(--ink-lift);
+  color: #F0B429;
+  border-color: #F0B429;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, .5);
+}
+[data-skin="stand"] .zip-toggle:hover { background: #F0B429; color: #0B0E14; }
+
+[data-skin="stand"] .hanko {
+  border-color: #F0B429; color: #F0B429;
+  background: var(--ink-lift);
+  box-shadow: 0 0 0 3px rgba(240, 180, 41, .14);
+}
+
+/* ── Portrait ────────────────────────────────────────────────────── */
+/* The frame element is now just a positioning context — the visible panel is
+   its ::before, so the keyline and the offset block belong there. */
+[data-skin="stand"] .portrait__frame { box-shadow: none; }
+[data-skin="stand"] .portrait__frame::before {
+  border-color: #F0B429;
+  background: var(--ink-lift);
+  box-shadow: 8px 8px 0 rgba(107, 78, 158, .55);
+}
+/* A cut-out figure on a dark page needs its own separation from the panel. */
+[data-skin="stand"] .portrait__frame img {
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, .55));
+}
+
+/* ── Rail nav becomes a zipper track ─────────────────────────────── */
+@media (min-width: 1440px) {
+  [data-skin="stand"] .rail::before {
+    content: ""; position: absolute;
+    right: -.55rem; top: 0; bottom: 0; width: 5px;
+    background: repeating-linear-gradient(to bottom,
+      rgba(240,180,41,.55) 0 4px, transparent 4px 10px);
+  }
+  [data-skin="stand"] .rail a { border-right-color: transparent; }
+  [data-skin="stand"] .rail a:hover,
+  [data-skin="stand"] .rail a:focus-visible { background: var(--ink-lift); color: #F5F7FA; }
+  [data-skin="stand"] .rail a[aria-current="true"] {
+    color: #F0B429; border-right-color: #F0B429; background: var(--ink-lift);
+  }
+}
+
+/* ── Contact ─────────────────────────────────────────────────────── */
+[data-skin="stand"] .contact__primary {
+  background: #F0B429; color: #0B0E14;
+  border-color: #F0B429;
+  box-shadow: 6px 6px 0 rgba(107, 78, 158, .55);
+}
+[data-skin="stand"] .contact__primary:hover {
+  background: #FFC93C;
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 rgba(107, 78, 158, .55);
+}
+[data-skin="stand"] .contact__label { color: #0B0E14; opacity: .72; font-weight: 700; }
+[data-skin="stand"] .contact__list a.is-static { color: #8FA9C4; }
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+[data-skin="stand"] .footer {
+  background: var(--ink-lift);
+  border-top: 2px solid var(--rule-strong);
+}
+[data-skin="stand"] .footer__word {
+  color: #F0B429;
+  text-shadow: 3px 3px 0 rgba(107, 78, 158, .6);
+}
+[data-skin="stand"] .footer__jp { color: #8FA9C4; }
+
+/* To Be Continued arrow — appears only in stand mode */
+[data-skin="stand"] .footer__sign::after {
+  content: "";
+  display: block;
+  width: 74px; height: 20px;
+  margin: 1.1rem auto 0;
+  background: #F0B429;
+  clip-path: polygon(0 34%, 62% 34%, 62% 0, 100% 50%, 62% 100%, 62% 66%, 0 66%);
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────── */
+[data-skin="stand"] { scrollbar-color: #F0B429 #12161f; }
+[data-skin="stand"] ::-webkit-scrollbar { width: 11px; }
+[data-skin="stand"] ::-webkit-scrollbar-track { background: #12161f; }
+[data-skin="stand"] ::-webkit-scrollbar-thumb { background: #F0B429; border: 3px solid #12161f; }
+
+/* ── Narrow screens: drop the corner cuts so nothing clips text ──── */
+@media (max-width: 30rem) {
+  [data-skin="stand"] .pillar,
+  [data-skin="stand"] .card { clip-path: none; }
+  [data-skin="stand"] .pillar::after,
+  [data-skin="stand"] .card::after { display: none; }
+}
+
+/* ── Skills tiers ────────────────────────────────────────────────── */
+[data-skin="stand"] .skills__group-mark { color: #F0B429; }
+[data-skin="stand"] .skills__group-title { color: #F5F7FA; }
+[data-skin="stand"] .skills__group--wide { border-top-color: var(--rule-strong); }
+
+/* ── Authorship ──────────────────────────────────────────────────── */
+[data-skin="stand"] .pub__authors { color: #8FA9C4; }
+[data-skin="stand"] .pub__authors strong { color: #F5F7FA; border-bottom-color: #F0B429; }
+[data-skin="stand"] .pub__authors sup,
+[data-skin="stand"] .pub__equal sup { color: #F0B429; }
+[data-skin="stand"] .badge--first {
+  color: #0B0E14; background: #F0B429; border-color: #F0B429;
+}
